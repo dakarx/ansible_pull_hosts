@@ -14,5 +14,11 @@
 - cron:
     user: ansible
     name: "hourly ansible-pull run"
-    minute: "0"  
     job: "/usr/bin/ansible-pull -U http://bromine.ofh.lan/root/ansible_pull.git > /dev/null"
+    state: absent
+
+- cron:
+    user: ansible
+    name: "hourly ansible-pull run"
+    minute: "0"  
+    job: "/usr/bin/ansible-pull -U https://github.com/dakarx/ansible_pull_hosts.git > /dev/null"
