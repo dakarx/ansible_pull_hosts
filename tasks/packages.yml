@@ -18,3 +18,5 @@
       - vim
       - openssh-server
   when: (ansible_facts['os_family'] == "RedHat" )
+
+

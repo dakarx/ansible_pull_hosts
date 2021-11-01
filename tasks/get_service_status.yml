@@ -1,0 +1,10 @@
+- name: check if multipath-tools service is actively running
+  shell: "if ! systemctl is-active multipath-tools; then  echo 'inactive' ; fi"
+  register: multipathtools_status
+  failed_when: False
+  changed_when: False
+- debug: var=multipathtools_status
+
+- name: check value of multipathtools_status
+  debug: 
+    msg: "{{'multipath-tools is inactive' if multipathtools_status.stdout=='inactive' else 'service is active'}} "

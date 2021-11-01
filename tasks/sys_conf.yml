@@ -1,0 +1,72 @@
+- name: copy multipath.conf to /etc
+  copy:
+    src: files/multipath.conf
+    dest: /etc/multipath.conf
+    owner: root
+    group: root
+    mode: 0440
+  when: multipathtools_status.stdout=='active'
+  notify: restart multipathtools
+
+- name: Disable root login with password via ssh
+  lineinfile:
+    path: /etc/ssh/sshd_config
+    state: present
+    regexp: "^PermitRootLogin"
+    line: "PermitRootLogin prohibit-password"
+  notify: restart sshd
+
+#- name: Restart multipath-tools service, if config changed
+#  ansible.builtin.service:
+#    name: multipath-tools
+#    state: restarted
+#  when: multipathtools_conf.changed
+
+- name: ensure rsyslog points to iron loghost Redhat/Centos
+  lineinfile:
+    path: /etc/rsyslog.conf
+    state: present
+    regexp: "^'*.*'"
+    line: "*.* @@loghost.ofh.lan:514"
+  notify: restart rsyslogd
+  when: (ansible_facts['os_family'] == "RedHat" )
+  notify:
+    - restart rsyslogd    
+
+- name: ensure rsyslog points to iron loghost ubuntu/debian
+  lineinfile:
+    path: /etc/rsyslog.d/50-default.conf
+    state: present
+    regexp: "^'*.*'"
+    line: "*.* @@loghost.ofh.lan:514"
+  notify: restart rsyslogd
+  when: (ansible_facts['os_family'] == "Debian" )
+  notify: restart rsyslogd    
+
+- name: Update all packages to their latest version  (APT based)
+  apt:
+    name: "*"
+    state: latest
+  when: (ansible_facts['os_family'] == "Debian" )
+
+- name: Update all packages to their latest version (YUM based )
+  yum:
+    name: "*"
+    state: latest
+  when: (ansible_facts['os_family'] == "RedHat" )
+
+- name: ensure xymon-client points to mercury 192.168.2.26
+  lineinfile:
+    path: /etc/default/xymon-client
+    state: present
+    regexp: "^XYMONSERVERS"
+    line: 'XYMONSERVERS="192.168.2.26"'
+  notify: restart xymon-client
+
+- name: ensure hosts file contains
+  lineinfile:
+    path: /etc/hosts
+    state: present
+    regexp: "^192.168.2.35"
+    line: "192.168.2.35  iodine iodine.ofh.lan"
+
