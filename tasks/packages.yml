@@ -1,0 +1,20 @@
+- name: Install packages
+  apt:
+    name: 
+      - htop
+      - mc
+      - tmux
+      - vim
+      - openssh-server
+      - xymon-client
+  when: (ansible_facts['os_family'] == "Debian" )
+
+- name: Install packages
+  yum:
+    name:
+      - htop
+      - mc
+      - tmux
+      - vim
+      - openssh-server
+  when: (ansible_facts['os_family'] == "RedHat" )
