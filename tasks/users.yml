@@ -1,6 +1,8 @@
 - name: create ansible user
   user:
     name: ansible
+    comment: Ansible service account
+    shell: /bin/bash
     system: yes
 
 - name: copy sudoers_ansible
