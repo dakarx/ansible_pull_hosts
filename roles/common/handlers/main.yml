@@ -1,0 +1,14 @@
+#---
+#handlers:
+  - name: restart sshd
+    service: name=sshd state=restarted
+
+  - name: restart multipathtools
+    service: name=multipath-tools state=restarted
+
+  - name: restart rsyslogd
+    service: name=rsyslog state=restarted
+
+  - name: restart xymon-client
+    service: name=xymon-client state=restarted
+
