@@ -54,7 +54,7 @@
   lineinfile:
     path: /etc/bash.bashrc
     state: present
-    regexp: "^neofetch
+    regexp: "^neofetch"
     line: "neofetch"
   when: (ansible_facts['os_family'] == "Debian" )
 
