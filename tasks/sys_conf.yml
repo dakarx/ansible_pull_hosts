@@ -49,6 +49,16 @@
     state: latest
   when: (ansible_facts['os_family'] == "Debian" )
 
+
+- name: ensure /etc/bash.bashrc contains neofetch
+  lineinfile:
+    path: /etc/bash.bashrc
+    state: present
+    regexp: "^neofetch
+    line: "neofetch"
+  when: (ansible_facts['os_family'] == "Debian" )
+
+
 - name: Update all packages to their latest version (YUM based )
   yum:
     name: "*"

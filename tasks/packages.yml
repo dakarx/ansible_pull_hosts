@@ -8,6 +8,7 @@
       - openssh-server
       - xymon-client
       - nfs-common
+      - neofetch
   when: (ansible_facts['os_family'] == "Debian" )
 
 - name: Install packages
