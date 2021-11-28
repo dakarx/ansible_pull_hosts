@@ -11,6 +11,14 @@
 - name: Disable root login with password via ssh
   lineinfile:
     path: /etc/ssh/sshd_config
+    state: absent
+    regexp: "^PermitRootLogin"
+    line: "PermitRootLogin yes"
+  notify: restart sshd
+
+- name: Disable root login with password via ssh
+  lineinfile:
+    path: /etc/ssh/sshd_config
     state: present
     regexp: "^PermitRootLogin"
     line: "PermitRootLogin prohibit-password"
