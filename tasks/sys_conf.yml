@@ -8,6 +8,14 @@
   when: multipathtools_status.stdout=='active'
   notify: restart multipathtools
 
+- name: copy issue /etc
+  copy:
+    src: files/issue
+    dest: /etc/issue
+    owner: root
+    group: root
+    mode: 0644
+
 - name: Disable root login with password via ssh
   lineinfile:
     path: /etc/ssh/sshd_config
@@ -81,10 +89,18 @@
     line: 'XYMONSERVERS="192.168.2.26"'
   notify: restart xymon-client
 
-- name: ensure hosts file contains
-  lineinfile:
-    path: /etc/hosts
-    state: present
-    regexp: "^192.168.2.35"
-    line: "192.168.2.35  iodine iodine.ofh.lan"
+  #- name: ensure hosts file contains
+  #lineinfile:
+  #  path: /etc/hosts
+  #  state: present
+  #  regexp: "^192.168.2.35"
+  #  line: "192.168.2.35  iodine iodine.ofh.lan"
+
+
+- name: Change /etc/sudoers.d perms
+  ansible.builtin.file:
+    path: /etc/sudoers.d
+    owner: root
+    group: root
+    mode: '0750'
 
