@@ -10,6 +10,7 @@
       - nfs-common
       - neofetch
       - ntpdate
+      - terminator
   when: (ansible_facts['os_family'] == "Debian" )
 
 - name: Install packages
