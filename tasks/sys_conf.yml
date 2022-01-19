@@ -23,7 +23,7 @@
     owner: root
     group: root
     mode: 0644
-  modify: restart snmpd
+  notify: restart snmpd
 
 - name: Disable root login with password via ssh
   lineinfile:
