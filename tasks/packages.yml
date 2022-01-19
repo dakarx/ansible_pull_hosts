@@ -1,3 +1,15 @@
+- name: Update all packages to their latest version  (APT based)
+  apt:
+    name: "*"
+    state: latest
+  when: (ansible_facts['os_family'] == "Debian" )
+
+- name: Update all packages to their latest version (YUM based )
+  yum:
+    name: "*"
+    state: latest
+  when: (ansible_facts['os_family'] == "RedHat" )
+
 - name: Install packages
   apt:
     name: 
