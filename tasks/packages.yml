@@ -11,6 +11,7 @@
       - neofetch
       - ntpdate
       - terminator
+      - snmpd
   when: (ansible_facts['os_family'] == "Debian" )
 
 - name: Install packages
@@ -21,6 +22,7 @@
       - tmux
       - vim
       - openssh-server
+      - snmpd
   when: (ansible_facts['os_family'] == "RedHat" )
 
 

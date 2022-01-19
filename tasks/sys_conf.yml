@@ -16,6 +16,14 @@
     group: root
     mode: 0644
 
+- name: copy snmpd.conf to /etc/snmp/
+  copy:
+    src: files/snmpd.conf
+    dest: /etc/snmp/snmpd.conf
+    owner: root
+    group: root
+    mode: 0644
+
 - name: Disable root login with password via ssh
   lineinfile:
     path: /etc/ssh/sshd_config
