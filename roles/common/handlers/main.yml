@@ -11,6 +11,10 @@
 
   - name: restart xymon-client
     service: name=xymon-client state=restarted
+
+  - name: restart snmpd
+    service: name=snmpd state=restarted
+#
 #
 #
 #
