@@ -120,5 +120,5 @@
     src: files/authorized_keys
     dest: /home/dave/.ssh/authorized_keys
     owner: dave
-     group: dave
+    group: dave
     mode: 0644
