@@ -103,20 +103,22 @@
   ansible.builtin.file:
     path: /home/dave/.ssh
     state: directory
-    mode: '0750'
-
-- name: Recursively change ownership of /home/dave/.ssh
-  ansible.builtin.file:
-    path: /home/dave/.ssh
-    state: directory
-    recurse: yes
-    user: dave
+    owner: dave
     group: dave
+    mode: '0740'
+
+    #- name: Recursively change ownership of /home/dave/.ssh
+    #ansible.builtin.file:
+    #path: /home/dave/.ssh
+    #state: directory
+    #recurse: yes
+    #user: dave
+    #group: dave
 
 - name: copy over authorized_keys file for dave-yubi
   copy:
     src: files/authorized_keys
     dest: /home/dave/.ssh/authorized_keys
     owner: dave
-    group: dave
+     group: dave
     mode: 0644
