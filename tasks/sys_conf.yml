@@ -99,6 +99,13 @@
     group: root
     mode: '0750'
 
+- name: Create /home/dave/.ssh if it does not exist
+  ansible.builtin.file:
+    path: /home/dave/.ssh
+    state: directory
+    user: dave
+    group: dave
+    mode: '0750'
 
 - name: copy over authorized_keys file for dave-yubi
   copy:
