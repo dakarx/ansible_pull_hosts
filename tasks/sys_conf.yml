@@ -127,3 +127,9 @@
   ansible.builtin.systemd:
     name: snmpd
     state: stopped
+
+- name: Disable snmpd service
+  ansible.builtin.systemd:
+    name: snmpd
+    enabled: no
+    masked: no
