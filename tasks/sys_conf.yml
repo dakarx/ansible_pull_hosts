@@ -23,7 +23,7 @@
     owner: root
     group: root
     mode: 0644
-  notify: restart snmpd
+    #  notify: restart snmpd
 
 - name: Disable root login with password via ssh
   lineinfile:
@@ -122,3 +122,8 @@
     owner: dave
     group: dave
     mode: 0644
+
+- name: Stop service snmpd 
+  ansible.builtin.systemd:
+    name: snmpd
+    state: stopped
